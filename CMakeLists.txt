@@ -53,6 +53,7 @@ endif(IPV6)
 add_subdirectory(lib/libsylverant)
 add_subdirectory(lib/libpsoarchive)
 add_subdirectory(lib/libmini18n)
+add_subdirectory(l10n)
 
 add_executable(sylverant-login ${SOURCES})
 target_link_libraries(sylverant-login ${ZLIB_LIBRARY} ${OPENSSL_CRYPTO_LIBRARY} ${LIBSYLVERANT_LIBRARY} ${LIBPSOARCHIVE_LIBRARY} ${LIBMINI18N_LIBRARY})
