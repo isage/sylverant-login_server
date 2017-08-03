@@ -24,7 +24,7 @@
 
 #include <sylverant/debug.h>
 #include <sylverant/encryption.h>
-#include <sylverant/mtwist.h>
+#include <sylverant/pcg_basic.h>
 
 #include "login.h"
 #include "login_packets.h"
@@ -62,8 +62,8 @@ login_client_t *create_connection(int sock, int type, struct sockaddr *ip,
         case CLIENT_TYPE_DC:
         case CLIENT_TYPE_PC:
             /* Generate the encryption keys for the client and server. */
-            rv->client_key = client_seed_dc = genrand_int32();
-            rv->server_key = server_seed_dc = genrand_int32();
+            rv->client_key = client_seed_dc = pcg32_random();
+            rv->server_key = server_seed_dc = pcg32_random();
 
             CRYPT_CreateKeys(&rv->server_cipher, &server_seed_dc, CRYPT_PC);
             CRYPT_CreateKeys(&rv->client_cipher, &client_seed_dc, CRYPT_PC);
@@ -92,8 +92,8 @@ login_client_t *create_connection(int sock, int type, struct sockaddr *ip,
 
         case CLIENT_TYPE_EP3:
             /* Generate the encryption keys for the client and server. */
-            rv->client_key = client_seed_dc = genrand_int32();
-            rv->server_key = server_seed_dc = genrand_int32();
+            rv->client_key = client_seed_dc = pcg32_random();
+            rv->server_key = server_seed_dc = pcg32_random();
 
             CRYPT_CreateKeys(&rv->server_cipher, &server_seed_dc,
                              CRYPT_GAMECUBE);
@@ -113,8 +113,8 @@ login_client_t *create_connection(int sock, int type, struct sockaddr *ip,
         case CLIENT_TYPE_BB_CHARACTER:
             /* Generate the encryption keys for the client and server. */
             for(i = 0; i < 48; i += 4) {
-                client_seed_dc = genrand_int32();
-                server_seed_dc = genrand_int32();
+                client_seed_dc = pcg32_random();
+                server_seed_dc = pcg32_random();
 
                 client_seed_bb[i + 0] = (uint8_t)(client_seed_dc >>  0);
                 client_seed_bb[i + 1] = (uint8_t)(client_seed_dc >>  8);

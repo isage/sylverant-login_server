@@ -35,7 +35,7 @@
 #include <sylverant/checksum.h>
 #include <sylverant/database.h>
 #include <sylverant/encryption.h>
-#include <sylverant/mtwist.h>
+#include <sylverant/pcg_basic.h>
 #include <sylverant/debug.h>
 #include <sylverant/quest.h>
 #include <sylverant/items.h>
@@ -732,6 +732,8 @@ int main(int argc, char *argv[]) {
     long size;
 
     parse_command_line(argc, argv);
+
+    pcg32_srandom(time(NULL),42);
 
     /* Save the initial path, so that if /restart is used we'll be starting from
        the same directory. */
