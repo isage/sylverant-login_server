@@ -16,6 +16,9 @@ include_directories(${CMAKE_SOURCE_DIR}/lib/libsylverant/include)
 set(LIBPSOARCHIVE_LIBRARY psoarchive)
 include_directories(${CMAKE_SOURCE_DIR}/lib/libpsoarchive/include)
 
+set(LIBMINI18N_LIBRARY mini18n)
+include_directories(${CMAKE_SOURCE_DIR}/lib/libmini18n/src)
+
 
 find_package(ZLIB REQUIRED)
 include_directories(${ZLIB_INCLUDE_DIR})
@@ -37,12 +40,15 @@ file(GLOB SOURCES src/*.c)
 add_definitions (-Wall)
 
 add_definitions (-DVERSION="${login_server_VERSION_STRING}")
+add_definitions (-DHAVE_LIBMINI18N)
 
 add_subdirectory(lib/libsylverant)
 add_subdirectory(lib/libpsoarchive)
+add_subdirectory(lib/libmini18n)
 
 add_executable(sylverant-login ${SOURCES})
-target_link_libraries(sylverant-login ${ZLIB_LIBRARY} ${OPENSSL_CRYPTO_LIBRARY} ${LIBSYLVERANT_LIBRARY} ${LIBPSOARCHIVE_LIBRARY})
+target_link_libraries(sylverant-login ${ZLIB_LIBRARY} ${OPENSSL_CRYPTO_LIBRARY} ${LIBSYLVERANT_LIBRARY} ${LIBPSOARCHIVE_LIBRARY} ${LIBMINI18N_LIBRARY})
+#add_dependencies(sylverant-login mini18n psoarchive sylverant)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     install(TARGETS sylverant-login RUNTIME DESTINATION bin)

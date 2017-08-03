@@ -4,3 +4,6 @@
 [submodule "lib/libsylverant"]
 	path = lib/libsylverant
 	url = https://github.com/isage/sylverant-libsylverant
+[submodule "lib/libmini18n"]
+	path = lib/libmini18n
+	url = https://github.com/isage/sylverant-mini18n
