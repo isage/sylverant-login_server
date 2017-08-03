@@ -1,7 +1,6 @@
-[submodule "libpsoarchive"]
-path = lib/libpsoarchive
-url = https://github.com/isage/sylverant-libpsoarchive
-
-[submodule "libsylverant"]
-path = lib/libsylverant
-url = https://github.com/isage/sylverant-libsylverant
+[submodule "lib/libpsoarchive"]
+	path = lib/libpsoarchive
+	url = https://github.com/isage/sylverant-libpsoarchive
+[submodule "lib/libsylverant"]
+	path = lib/libsylverant
+	url = https://github.com/isage/sylverant-libsylverant
