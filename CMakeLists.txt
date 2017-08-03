@@ -8,6 +8,9 @@ set(login_server_VERSION_MINOR 0)
 
 set(login_server_VERSION_STRING "${login_server_MAJOR_VERSION}.${login_server_MINOR_VERSION}.${login_server_PATCH_VERSION}")
 
+
+option(IPV6 "build application with IPv6 Support" ON) # ON is the default
+
 include_directories(src)
 
 set(LIBSYLVERANT_LIBRARY sylverant)
@@ -41,6 +44,11 @@ add_definitions (-Wall)
 
 add_definitions (-DVERSION="${login_server_VERSION_STRING}")
 add_definitions (-DHAVE_LIBMINI18N)
+
+if(IPV6)
+  add_definitions(-DENABLE_IPV6)
+endif(IPV6)
+
 
 add_subdirectory(lib/libsylverant)
 add_subdirectory(lib/libpsoarchive)
